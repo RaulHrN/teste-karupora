@@ -1,0 +1,218 @@
+export interface Patient {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  cpf: string;
+  birthDate: string;
+  gender: "masculino" | "feminino" | "outro";
+  objective: string;
+  status: "ativo" | "inativo";
+  lastVisit: string | null;
+  nextVisit: string | null;
+  paymentStatus: "em_dia" | "pendente" | "inadimplente";
+  allergies: string[];
+  intolerances: string[];
+  medicalHistory: string;
+  medications: string;
+  address: {
+    street: string;
+    number: string;
+    complement?: string;
+    neighborhood: string;
+    city: string;
+    state: string;
+    zip: string;
+  };
+  notes: string;
+  lgpdConsent: boolean;
+  lgpdConsentDate: string | null;
+  createdAt: string;
+}
+
+export const mockPatients: Patient[] = [
+  {
+    id: "1",
+    name: "Maria Silva",
+    email: "maria.silva@email.com",
+    phone: "(11) 99876-5432",
+    cpf: "123.456.789-00",
+    birthDate: "1990-05-15",
+    gender: "feminino",
+    objective: "Emagrecimento",
+    status: "ativo",
+    lastVisit: "2026-03-18",
+    nextVisit: "2026-04-01",
+    paymentStatus: "em_dia",
+    allergies: ["Camarão", "Amendoim"],
+    intolerances: ["Lactose"],
+    medicalHistory: "Hipotireoidismo diagnosticado em 2020. Uso contínuo de Puran T4.",
+    medications: "Puran T4 75mcg",
+    address: { street: "Rua Augusta", number: "1200", complement: "Apto 42", neighborhood: "Consolação", city: "São Paulo", state: "SP", zip: "01304-001" },
+    notes: "Paciente motivada, boa adesão ao plano alimentar.",
+    lgpdConsent: true,
+    lgpdConsentDate: "2025-06-10",
+    createdAt: "2025-06-10",
+  },
+  {
+    id: "2",
+    name: "João Santos",
+    email: "joao.santos@email.com",
+    phone: "(11) 98765-4321",
+    cpf: "987.654.321-00",
+    birthDate: "1985-11-22",
+    gender: "masculino",
+    objective: "Ganho de massa muscular",
+    status: "ativo",
+    lastVisit: "2026-03-15",
+    nextVisit: "2026-03-29",
+    paymentStatus: "em_dia",
+    allergies: [],
+    intolerances: ["Glúten"],
+    medicalHistory: "Sem comorbidades relevantes.",
+    medications: "",
+    address: { street: "Av. Paulista", number: "900", neighborhood: "Bela Vista", city: "São Paulo", state: "SP", zip: "01310-100" },
+    notes: "Pratica musculação 5x por semana.",
+    lgpdConsent: true,
+    lgpdConsentDate: "2025-08-20",
+    createdAt: "2025-08-20",
+  },
+  {
+    id: "3",
+    name: "Ana Oliveira",
+    email: "ana.oliveira@email.com",
+    phone: "(21) 97654-3210",
+    cpf: "456.789.123-00",
+    birthDate: "1978-03-08",
+    gender: "feminino",
+    objective: "Controle de diabetes",
+    status: "ativo",
+    lastVisit: "2026-02-28",
+    nextVisit: null,
+    paymentStatus: "pendente",
+    allergies: ["Corantes artificiais"],
+    intolerances: [],
+    medicalHistory: "Diabetes tipo 2 desde 2018. HAS controlada com medicação.",
+    medications: "Metformina 850mg, Losartana 50mg",
+    address: { street: "Rua Voluntários da Pátria", number: "340", neighborhood: "Botafogo", city: "Rio de Janeiro", state: "RJ", zip: "22270-010" },
+    notes: "Necessita acompanhamento mais frequente.",
+    lgpdConsent: true,
+    lgpdConsentDate: "2025-09-05",
+    createdAt: "2025-09-05",
+  },
+  {
+    id: "4",
+    name: "Carlos Souza",
+    email: "carlos.souza@email.com",
+    phone: "(31) 96543-2100",
+    cpf: "789.123.456-00",
+    birthDate: "1995-07-30",
+    gender: "masculino",
+    objective: "Reeducação alimentar",
+    status: "inativo",
+    lastVisit: "2025-12-10",
+    nextVisit: null,
+    paymentStatus: "inadimplente",
+    allergies: [],
+    intolerances: [],
+    medicalHistory: "Sem comorbidades.",
+    medications: "",
+    address: { street: "Rua da Bahia", number: "1500", neighborhood: "Lourdes", city: "Belo Horizonte", state: "MG", zip: "30160-011" },
+    notes: "Não comparece há mais de 90 dias. Tentativa de contato sem sucesso.",
+    lgpdConsent: true,
+    lgpdConsentDate: "2025-07-15",
+    createdAt: "2025-07-15",
+  },
+  {
+    id: "5",
+    name: "Fernanda Lima",
+    email: "fernanda.lima@email.com",
+    phone: "(11) 95432-1098",
+    cpf: "321.654.987-00",
+    birthDate: "2000-01-12",
+    gender: "feminino",
+    objective: "Nutrição esportiva",
+    status: "ativo",
+    lastVisit: "2026-03-19",
+    nextVisit: "2026-04-02",
+    paymentStatus: "em_dia",
+    allergies: ["Frutos do mar"],
+    intolerances: [],
+    medicalHistory: "Atleta de crossfit. Sem comorbidades.",
+    medications: "",
+    address: { street: "Rua Oscar Freire", number: "780", complement: "Sala 3", neighborhood: "Jardins", city: "São Paulo", state: "SP", zip: "01426-001" },
+    notes: "Treina 6x por semana. Foco em performance.",
+    lgpdConsent: true,
+    lgpdConsentDate: "2026-01-10",
+    createdAt: "2026-01-10",
+  },
+  {
+    id: "6",
+    name: "Roberto Almeida",
+    email: "roberto.almeida@email.com",
+    phone: "(41) 94321-0987",
+    cpf: "654.987.321-00",
+    birthDate: "1970-09-25",
+    gender: "masculino",
+    objective: "Emagrecimento",
+    status: "ativo",
+    lastVisit: "2026-03-10",
+    nextVisit: "2026-03-24",
+    paymentStatus: "pendente",
+    allergies: [],
+    intolerances: ["Lactose", "Glúten"],
+    medicalHistory: "Colesterol alto. Esteatose hepática grau 1.",
+    medications: "Sinvastatina 20mg",
+    address: { street: "Rua XV de Novembro", number: "200", neighborhood: "Centro", city: "Curitiba", state: "PR", zip: "80020-310" },
+    notes: "Paciente com dificuldade em manter adesão nos finais de semana.",
+    lgpdConsent: true,
+    lgpdConsentDate: "2025-11-01",
+    createdAt: "2025-11-01",
+  },
+  {
+    id: "7",
+    name: "Paula Mendes",
+    email: "paula.mendes@email.com",
+    phone: "(11) 93210-9876",
+    cpf: "147.258.369-00",
+    birthDate: "1988-12-03",
+    gender: "feminino",
+    objective: "Gestação saudável",
+    status: "ativo",
+    lastVisit: "2026-01-12",
+    nextVisit: null,
+    paymentStatus: "em_dia",
+    allergies: [],
+    intolerances: [],
+    medicalHistory: "Gestante — 24 semanas. Pré-natal sem intercorrências.",
+    medications: "Ácido fólico, Sulfato ferroso",
+    address: { street: "Rua Haddock Lobo", number: "595", neighborhood: "Cerqueira César", city: "São Paulo", state: "SP", zip: "01414-001" },
+    notes: "Sem retorno há mais de 60 dias — reagendar urgente.",
+    lgpdConsent: true,
+    lgpdConsentDate: "2025-10-20",
+    createdAt: "2025-10-20",
+  },
+  {
+    id: "8",
+    name: "Ricardo Gomes",
+    email: "ricardo.gomes@email.com",
+    phone: "(21) 92109-8765",
+    cpf: "258.369.147-00",
+    birthDate: "1992-06-18",
+    gender: "masculino",
+    objective: "Ganho de massa muscular",
+    status: "inativo",
+    lastVisit: "2026-01-05",
+    nextVisit: null,
+    paymentStatus: "inadimplente",
+    allergies: ["Nozes"],
+    intolerances: [],
+    medicalHistory: "Sem comorbidades.",
+    medications: "",
+    address: { street: "Rua Visconde de Pirajá", number: "330", neighborhood: "Ipanema", city: "Rio de Janeiro", state: "RJ", zip: "22410-003" },
+    notes: "Cancelou últimas 3 consultas. Cobrança em aberto.",
+    lgpdConsent: true,
+    lgpdConsentDate: "2025-09-15",
+    createdAt: "2025-09-15",
+  },
+];
