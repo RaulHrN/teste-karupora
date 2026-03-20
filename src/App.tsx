@@ -8,6 +8,7 @@ import Agenda from "./pages/Agenda.tsx";
 import Pacientes from "./pages/Pacientes.tsx";
 import PacienteNovo from "./pages/PacienteNovo.tsx";
 import PacientePerfil from "./pages/PacientePerfil.tsx";
+import Prontuarios from "./pages/Prontuarios.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/pacientes" element={<Pacientes />} />
           <Route path="/pacientes/novo" element={<PacienteNovo />} />
           <Route path="/pacientes/:id" element={<PacientePerfil />} />
+          <Route path="/prontuarios" element={<Prontuarios />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
