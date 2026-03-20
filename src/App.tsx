@@ -10,6 +10,7 @@ import PacienteNovo from "./pages/PacienteNovo.tsx";
 import PacientePerfil from "./pages/PacientePerfil.tsx";
 import Prontuarios from "./pages/Prontuarios.tsx";
 import Financeiro from "./pages/Financeiro.tsx";
+import Marketing from "./pages/Marketing.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
