@@ -11,7 +11,7 @@ import {
   Leaf,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
-import { useLocation } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 import {
   Sidebar,
   SidebarContent,
@@ -27,27 +27,27 @@ import {
 } from "@/components/ui/sidebar";
 
 const mainItems = [
-  { title: "Dashboard", url: "/", icon: LayoutDashboard },
-  { title: "Agenda", url: "/agenda", icon: Calendar },
-  { title: "Pacientes", url: "/pacientes", icon: Users },
-  { title: "Prontuários", url: "/prontuarios", icon: FileText },
+  { titleKey: "dashboard", url: "/", icon: LayoutDashboard },
+  { titleKey: "agenda", url: "/agenda", icon: Calendar },
+  { titleKey: "patients", url: "/pacientes", icon: Users },
+  { titleKey: "records", url: "/prontuarios", icon: FileText },
 ];
 
 const managementItems = [
-  { title: "Financeiro", url: "/financeiro", icon: DollarSign },
-  { title: "WhatsApp", url: "/whatsapp", icon: MessageCircle },
-  { title: "Marketing", url: "/marketing", icon: Megaphone },
-  { title: "Relatórios", url: "/relatorios", icon: BarChart3 },
+  { titleKey: "financial", url: "/financeiro", icon: DollarSign },
+  { titleKey: "whatsapp", url: "/whatsapp", icon: MessageCircle },
+  { titleKey: "marketing", url: "/marketing", icon: Megaphone },
+  { titleKey: "reports", url: "/relatorios", icon: BarChart3 },
 ];
 
 export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
-  const location = useLocation();
+  const { t } = useLanguage();
 
   const renderItems = (items: typeof mainItems) =>
     items.map((item) => (
-      <SidebarMenuItem key={item.title}>
+      <SidebarMenuItem key={item.titleKey}>
         <SidebarMenuButton asChild>
           <NavLink
             to={item.url}
@@ -56,7 +56,7 @@ export function AppSidebar() {
             activeClassName="bg-accent text-accent-foreground font-medium"
           >
             <item.icon className="mr-2 h-4 w-4 shrink-0" />
-            {!collapsed && <span>{item.title}</span>}
+            {!collapsed && <span>{t(item.titleKey)}</span>}
           </NavLink>
         </SidebarMenuButton>
       </SidebarMenuItem>
@@ -72,7 +72,7 @@ export function AppSidebar() {
           {!collapsed && (
             <div>
               <h1 className="text-sm font-semibold text-foreground">NutriGestão</h1>
-              <p className="text-[10px] text-muted-foreground">Gestão Nutricional</p>
+              <p className="text-[10px] text-muted-foreground">{t("nutritionManagement")}</p>
             </div>
           )}
         </div>
@@ -80,14 +80,14 @@ export function AppSidebar() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Principal</SidebarGroupLabel>
+          <SidebarGroupLabel>{t("main")}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>{renderItems(mainItems)}</SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Gestão</SidebarGroupLabel>
+          <SidebarGroupLabel>{t("management")}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>{renderItems(managementItems)}</SidebarMenu>
           </SidebarGroupContent>
@@ -104,7 +104,7 @@ export function AppSidebar() {
                 activeClassName="bg-accent text-accent-foreground font-medium"
               >
                 <Settings className="mr-2 h-4 w-4 shrink-0" />
-                {!collapsed && <span>Configurações</span>}
+                {!collapsed && <span>{t("settings")}</span>}
               </NavLink>
             </SidebarMenuButton>
           </SidebarMenuItem>
