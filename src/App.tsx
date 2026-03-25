@@ -13,6 +13,7 @@ import PacientePerfil from "./pages/PacientePerfil.tsx";
 import Prontuarios from "./pages/Prontuarios.tsx";
 import Financeiro from "./pages/Financeiro.tsx";
 import Marketing from "./pages/Marketing.tsx";
+import Relatorios from "./pages/Relatorios.tsx";
 import Login from "./pages/Login.tsx";
 import Onboarding from "./pages/Onboarding.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -38,6 +39,7 @@ const App = () => (
               <Route path="/prontuarios" element={<Prontuarios />} />
               <Route path="/financeiro" element={<Financeiro />} />
               <Route path="/marketing" element={<Marketing />} />
+              <Route path="/relatorios" element={<Relatorios />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
