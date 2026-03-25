@@ -13,6 +13,8 @@ import PacientePerfil from "./pages/PacientePerfil.tsx";
 import Prontuarios from "./pages/Prontuarios.tsx";
 import Financeiro from "./pages/Financeiro.tsx";
 import Marketing from "./pages/Marketing.tsx";
+import Login from "./pages/Login.tsx";
+import Onboarding from "./pages/Onboarding.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -26,6 +28,8 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/onboarding" element={<Onboarding />} />
               <Route path="/" element={<Index />} />
               <Route path="/agenda" element={<Agenda />} />
               <Route path="/pacientes" element={<Pacientes />} />
