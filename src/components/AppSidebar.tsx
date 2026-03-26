@@ -35,7 +35,7 @@ const mainItems = [
 
 const managementItems = [
   { titleKey: "financial", url: "/financeiro", icon: DollarSign },
-  { titleKey: "whatsapp", url: "/whatsapp", icon: MessageCircle },
+  { titleKey: "chat", url: "/chat", icon: MessageCircle },
   { titleKey: "marketing", url: "/marketing", icon: Megaphone },
   { titleKey: "reports", url: "/relatorios", icon: BarChart3 },
 ];
