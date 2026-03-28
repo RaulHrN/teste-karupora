@@ -356,6 +356,14 @@ export default function Financeiro() {
           </TabsContent>
         </Tabs>
       </div>
+
+      {reminderTransaction && (
+        <BillingReminderDialog
+          open={!!reminderTransaction}
+          onOpenChange={(open) => { if (!open) setReminderTransaction(null); }}
+          transaction={reminderTransaction}
+        />
+      )}
     </AppLayout>
   );
 }
