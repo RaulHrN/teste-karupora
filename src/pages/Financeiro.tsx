@@ -44,6 +44,7 @@ import {
 import { mockTransactions, monthlyRevenue, Transaction } from "@/data/financeiro";
 import { format, parseISO, differenceInDays } from "date-fns";
 import { toast } from "@/hooks/use-toast";
+import { BillingReminderDialog } from "@/components/BillingReminderDialog";
 
 const statusConfig = {
   pago: { label: "Pago", className: "bg-primary/10 text-primary border-primary/20" },
@@ -69,6 +70,7 @@ function exportCSV(transactions: Transaction[]) {
 
 export default function Financeiro() {
   const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [reminderTransaction, setReminderTransaction] = useState<Transaction | null>(null);
   const today = new Date();
 
   const filtered = useMemo(() => {
@@ -178,6 +180,7 @@ export default function Financeiro() {
                       <TableHead>Vencimento</TableHead>
                       <TableHead>Status</TableHead>
                       <TableHead>Método</TableHead>
+                      <TableHead className="w-[80px]"></TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -193,6 +196,13 @@ export default function Financeiro() {
                           </Badge>
                         </TableCell>
                         <TableCell className="text-sm text-muted-foreground capitalize">{t.method || "—"}</TableCell>
+                        <TableCell>
+                          {t.status === "atrasado" && (
+                            <Button variant="ghost" size="sm" className="text-xs text-destructive hover:text-destructive" onClick={() => setReminderTransaction(t)}>
+                              Cobrar
+                            </Button>
+                          )}
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -250,6 +260,7 @@ export default function Financeiro() {
                             <TableHead>Valor</TableHead>
                             <TableHead>Vencimento</TableHead>
                             <TableHead>Dias atraso</TableHead>
+                            <TableHead className="w-[80px]"></TableHead>
                           </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -263,6 +274,11 @@ export default function Financeiro() {
                                 <Badge variant="outline" className="bg-destructive/10 text-destructive border-destructive/20 text-xs">
                                   {differenceInDays(today, parseISO(t.dueDate))}d
                                 </Badge>
+                              </TableCell>
+                              <TableCell>
+                                <Button variant="ghost" size="sm" className="text-xs text-destructive hover:text-destructive" onClick={() => setReminderTransaction(t)}>
+                                  Cobrar
+                                </Button>
                               </TableCell>
                             </TableRow>
                           ))}
