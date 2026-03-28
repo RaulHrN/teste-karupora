@@ -16,6 +16,7 @@ import {
   Building2,
   Users,
   MessageSquareText,
+  Palette,
   Save,
   Plus,
   Pencil,
@@ -26,6 +27,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { ThemeCustomizer } from "@/components/ThemeCustomizer";
 
 // ── Mock data ──
 
