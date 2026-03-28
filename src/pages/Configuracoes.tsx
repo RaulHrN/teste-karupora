@@ -226,7 +226,7 @@ export default function Configuracoes() {
         </div>
 
         <Tabs defaultValue="clinica" className="space-y-4">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="clinica" className="gap-1.5">
               <Building2 className="h-4 w-4" /> Clínica
             </TabsTrigger>
@@ -235,6 +235,9 @@ export default function Configuracoes() {
             </TabsTrigger>
             <TabsTrigger value="templates" className="gap-1.5">
               <MessageSquareText className="h-4 w-4" /> Templates
+            </TabsTrigger>
+            <TabsTrigger value="aparencia" className="gap-1.5">
+              <Palette className="h-4 w-4" /> Aparência
             </TabsTrigger>
           </TabsList>
 
