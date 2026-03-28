@@ -635,6 +635,11 @@ export default function Configuracoes() {
               ))}
             </div>
           </TabsContent>
+
+          {/* ═══════════ APARÊNCIA ═══════════ */}
+          <TabsContent value="aparencia">
+            <ThemeCustomizer />
+          </TabsContent>
         </Tabs>
       </div>
     </AppLayout>
