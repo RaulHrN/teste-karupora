@@ -117,6 +117,7 @@ export default function PacientePerfil() {
         <Tabs defaultValue="dados" className="space-y-4">
           <TabsList>
             <TabsTrigger value="dados">Dados Pessoais</TabsTrigger>
+            <TabsTrigger value="plano">Plano Alimentar</TabsTrigger>
             <TabsTrigger value="consultas">Consultas</TabsTrigger>
             <TabsTrigger value="prontuarios">Prontuários</TabsTrigger>
             <TabsTrigger value="financeiro">Financeiro</TabsTrigger>
