@@ -23,7 +23,7 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import { mockPatients, Patient } from "@/data/patients";
-import { mockMealPlan, mockBodyMetrics } from "@/data/prontuario";
+import { mockMealPlans, mockBodyMetrics } from "@/data/prontuario";
 import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -114,7 +114,7 @@ export default function Chat() {
     if (!selectedPatient) return;
     const msg: Message = {
       id: `m-${Date.now()}`,
-      text: `📋 Cardápio "${mockMealPlan.title}" enviado — ${mockMealPlan.targetCalories} kcal/dia.`,
+      text: `📋 Cardápio "${(mockMealPlans[selectedPatient.id]?.[0])?.title || "Plano"}" enviado — ${(mockMealPlans[selectedPatient.id]?.[0])?.targetCalories || 0} kcal/dia.`,
       sender: "user",
       timestamp: new Date(),
     };
@@ -262,14 +262,14 @@ export default function Chat() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="font-semibold text-sm text-foreground">{mockMealPlan.title}</h3>
-                  <p className="text-xs text-muted-foreground">{mockMealPlan.targetCalories} kcal/dia</p>
+                  <h3 className="font-semibold text-sm text-foreground">{(mockMealPlans[selectedPatient?.id || ""]?.[0])?.title || "Sem plano"}</h3>
+                  <p className="text-xs text-muted-foreground">{(mockMealPlans[selectedPatient?.id || ""]?.[0])?.targetCalories || 0} kcal/dia</p>
                 </div>
                 <Button size="sm" onClick={handleSendMealPlan}>
                   <Share2 className="h-3.5 w-3.5 mr-1" /> Enviar
                 </Button>
               </div>
-              {mockMealPlan.meals.map((meal) => (
+              {(mockMealPlans[selectedPatient?.id || ""]?.[0])?.meals.map((meal) => (
                 <Card key={meal.name}>
                   <CardHeader className="p-3 pb-1">
                     <CardTitle className="text-xs font-semibold flex justify-between">

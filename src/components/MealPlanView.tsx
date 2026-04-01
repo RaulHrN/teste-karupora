@@ -8,14 +8,28 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { mockMealPlan, Meal } from "@/data/prontuario";
-import { Clock, Flame, Beef, Wheat, Droplets } from "lucide-react";
-import { useMemo } from "react";
+import { mockMealPlans, Meal } from "@/data/prontuario";
+import { Clock, Flame, Beef, Wheat, Droplets, FileText } from "lucide-react";
+import { useMemo, useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-export function MealPlanView() {
-  const plan = mockMealPlan;
+interface MealPlanViewProps {
+  patientId?: string;
+}
+
+export function MealPlanView({ patientId = "1" }: MealPlanViewProps) {
+  const plans = mockMealPlans[patientId] || [];
+  const [selectedPlanId, setSelectedPlanId] = useState<string>(plans[0]?.id || "");
+  const plan = plans.find((p) => p.id === selectedPlanId) || plans[0];
 
   const totals = useMemo(() => {
+    if (!plan) return { calories: 0, protein: 0, carbs: 0, fat: 0 };
     return plan.meals.reduce(
       (acc, meal) => {
         meal.items.forEach((item) => {
@@ -30,9 +44,37 @@ export function MealPlanView() {
     );
   }, [plan]);
 
+  if (!plan) {
+    return (
+      <Card>
+        <CardContent className="flex flex-col items-center justify-center h-40 text-muted-foreground">
+          <FileText className="h-8 w-8 mb-2 opacity-40" />
+          <p className="text-sm">Nenhum plano alimentar cadastrado para este paciente.</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <div className="space-y-4">
-      {/* Plan header */}
+      {plans.length > 1 && (
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-muted-foreground">Plano:</span>
+          <Select value={selectedPlanId} onValueChange={setSelectedPlanId}>
+            <SelectTrigger className="w-[320px]">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {plans.map((p) => (
+                <SelectItem key={p.id} value={p.id}>
+                  {p.title} ({p.date})
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      )}
+
       <Card>
         <CardContent className="p-4">
           <div className="flex items-center justify-between flex-wrap gap-3">
@@ -50,7 +92,6 @@ export function MealPlanView() {
         </CardContent>
       </Card>
 
-      {/* Meals */}
       {plan.meals.map((meal, i) => (
         <MealCard key={i} meal={meal} />
       ))}

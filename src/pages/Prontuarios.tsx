@@ -88,7 +88,7 @@ export default function Prontuarios() {
           </TabsContent>
 
           <TabsContent value="plano">
-            <MealPlanView />
+            <MealPlanView patientId={selectedPatient} />
           </TabsContent>
 
           <TabsContent value="anamnese">

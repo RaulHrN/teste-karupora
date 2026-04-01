@@ -1,5 +1,6 @@
 import { AppLayout } from "@/components/AppLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { MealPlanView } from "@/components/MealPlanView";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -21,6 +22,7 @@ import {
   FileText,
   DollarSign,
   Edit,
+  UtensilsCrossed,
 } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { mockPatients } from "@/data/patients";
@@ -115,6 +117,7 @@ export default function PacientePerfil() {
         <Tabs defaultValue="dados" className="space-y-4">
           <TabsList>
             <TabsTrigger value="dados">Dados Pessoais</TabsTrigger>
+            <TabsTrigger value="plano">Plano Alimentar</TabsTrigger>
             <TabsTrigger value="consultas">Consultas</TabsTrigger>
             <TabsTrigger value="prontuarios">Prontuários</TabsTrigger>
             <TabsTrigger value="financeiro">Financeiro</TabsTrigger>
@@ -174,6 +177,11 @@ export default function PacientePerfil() {
                 </CardContent>
               </Card>
             </div>
+          </TabsContent>
+
+          {/* Plano Alimentar */}
+          <TabsContent value="plano">
+            <MealPlanView patientId={id} />
           </TabsContent>
 
           {/* Consultas */}
