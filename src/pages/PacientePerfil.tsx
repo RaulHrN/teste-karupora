@@ -22,6 +22,7 @@ import {
   FileText,
   DollarSign,
   Edit,
+  UtensilsCrossed,
 } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { mockPatients } from "@/data/patients";
