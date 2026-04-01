@@ -54,19 +54,6 @@ export function MealPlanView({ patientId = "1" }: MealPlanViewProps) {
       </Card>
     );
   }
-    return plan.meals.reduce(
-      (acc, meal) => {
-        meal.items.forEach((item) => {
-          acc.calories += item.calories;
-          acc.protein += item.protein;
-          acc.carbs += item.carbs;
-          acc.fat += item.fat;
-        });
-        return acc;
-      },
-      { calories: 0, protein: 0, carbs: 0, fat: 0 }
-    );
-  }, [plan]);
 
   return (
     <div className="space-y-4">
