@@ -23,7 +23,7 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import { mockPatients, Patient } from "@/data/patients";
-import { mockMealPlan, mockBodyMetrics } from "@/data/prontuario";
+import { mockMealPlans, mockBodyMetrics } from "@/data/prontuario";
 import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
 
