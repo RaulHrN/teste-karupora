@@ -114,7 +114,7 @@ export default function Chat() {
     if (!selectedPatient) return;
     const msg: Message = {
       id: `m-${Date.now()}`,
-      text: `📋 Cardápio "${mockMealPlan.title}" enviado — ${mockMealPlan.targetCalories} kcal/dia.`,
+      text: `📋 Cardápio "${(mockMealPlans[selectedPatient.id]?.[0])?.title || "Plano"}" enviado — ${(mockMealPlans[selectedPatient.id]?.[0])?.targetCalories || 0} kcal/dia.`,
       sender: "user",
       timestamp: new Date(),
     };
