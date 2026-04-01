@@ -179,6 +179,11 @@ export default function PacientePerfil() {
             </div>
           </TabsContent>
 
+          {/* Plano Alimentar */}
+          <TabsContent value="plano">
+            <MealPlanView patientId={id} />
+          </TabsContent>
+
           {/* Consultas */}
           <TabsContent value="consultas">
             <Card>
