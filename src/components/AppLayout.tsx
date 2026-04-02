@@ -4,6 +4,7 @@ import { Moon, Sun, Globe } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguage, languages } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
+import { RoleSwitcher } from "@/components/RoleSwitcher";
 import {
   DropdownMenu,
   DropdownMenuContent,
