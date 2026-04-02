@@ -6,7 +6,7 @@ export interface AppUser {
   id: string;
   name: string;
   email: string;
-  role: UserRole;
+  roles: UserRole[];
   clinicId: string;
   clinicName: string;
   crn?: string;
@@ -20,6 +20,7 @@ interface AuthContextType {
   switchUser: (userId: string) => void;
   allUsers: AppUser[];
   hasAccess: (module: AppModule) => boolean;
+  hasRole: (role: UserRole) => boolean;
 }
 
 export type AppModule =
@@ -69,7 +70,7 @@ export const mockUsers: AppUser[] = [
     id: "u1",
     name: "Dra. Natália Costa",
     email: "natalia@nutrigestao.com",
-    role: "master",
+    roles: ["master"],
     clinicId: "c1",
     clinicName: "NutriVida Clínica",
     crn: "CRN-3 12345",
@@ -78,7 +79,7 @@ export const mockUsers: AppUser[] = [
     id: "u2",
     name: "Dr. Pedro Mendes",
     email: "pedro@nutrigestao.com",
-    role: "nutricionista",
+    roles: ["nutricionista"],
     clinicId: "c1",
     clinicName: "NutriVida Clínica",
     crn: "CRN-3 67890",
@@ -88,7 +89,7 @@ export const mockUsers: AppUser[] = [
     id: "u3",
     name: "Ana Clara Souza",
     email: "ana@nutrigestao.com",
-    role: "administrativo",
+    roles: ["administrativo", "financeiro"],
     clinicId: "c1",
     clinicName: "NutriVida Clínica",
   },
@@ -96,7 +97,7 @@ export const mockUsers: AppUser[] = [
     id: "u4",
     name: "Marcos Ribeiro",
     email: "marcos@nutrigestao.com",
-    role: "financeiro",
+    roles: ["financeiro"],
     clinicId: "c1",
     clinicName: "NutriVida Clínica",
   },
@@ -104,7 +105,7 @@ export const mockUsers: AppUser[] = [
     id: "u5",
     name: "Dra. Juliana Reis",
     email: "juliana@nutrigestao.com",
-    role: "nutricionista",
+    roles: ["nutricionista", "administrativo"],
     clinicId: "c1",
     clinicName: "NutriVida Clínica",
     crn: "CRN-3 11223",
@@ -123,11 +124,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const hasAccess = (module: AppModule): boolean => {
-    return rolePermissions[user.role].includes(module);
+    return user.roles.some((role) => rolePermissions[role].includes(module));
+  };
+
+  const hasRole = (role: UserRole): boolean => {
+    return user.roles.includes(role);
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, switchUser, allUsers: mockUsers, hasAccess }}>
+    <AuthContext.Provider value={{ user, setUser, switchUser, allUsers: mockUsers, hasAccess, hasRole }}>
       {children}
     </AuthContext.Provider>
   );
