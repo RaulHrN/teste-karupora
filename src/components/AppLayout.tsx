@@ -4,6 +4,7 @@ import { Moon, Sun, Globe } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguage, languages } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
+import { RoleSwitcher } from "@/components/RoleSwitcher";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,19 +25,11 @@ export function AppLayout({ children }: AppLayoutProps) {
       <div className="min-h-screen flex w-full">
         <AppSidebar />
         <div className="flex-1 flex flex-col min-w-0">
-          <header className="h-14 flex items-center justify-between border-b bg-background px-4 shrink-0">
-            <div className="flex items-center">
-              <SidebarTrigger className="mr-4" />
-              <div className="flex items-center gap-2">
-                <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-xs font-medium text-primary">
-                  NC
-                </div>
-                <div className="hidden sm:block">
-                  <p className="text-sm font-medium">Dra. Natália Costa</p>
-                  <p className="text-[11px] text-muted-foreground">{t("nutritionist")} — CRN 12345</p>
-                </div>
-              </div>
-            </div>
+           <header className="h-14 flex items-center justify-between border-b bg-background px-4 shrink-0">
+             <div className="flex items-center">
+               <SidebarTrigger className="mr-4" />
+               <RoleSwitcher />
+             </div>
 
             <div className="flex items-center gap-1">
               {/* Language Switcher */}

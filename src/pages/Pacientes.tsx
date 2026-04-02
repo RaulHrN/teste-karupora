@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { AppLayout } from "@/components/AppLayout";
+import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -37,18 +38,27 @@ const statusBadge = {
 
 export default function Pacientes() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [objectiveFilter, setObjectiveFilter] = useState<string>("all");
   const [paymentFilter, setPaymentFilter] = useState<string>("all");
 
+  // Nutricionistas veem apenas seus próprios pacientes
+  const basePatients = useMemo(() => {
+    if (user.role === "nutricionista" && user.assignedPatientIds) {
+      return mockPatients.filter((p) => user.assignedPatientIds!.includes(p.id));
+    }
+    return mockPatients;
+  }, [user]);
+
   const objectives = useMemo(
-    () => [...new Set(mockPatients.map((p) => p.objective))],
-    []
+    () => [...new Set(basePatients.map((p) => p.objective))],
+    [basePatients]
   );
 
   const filtered = useMemo(() => {
-    return mockPatients.filter((p) => {
+    return basePatients.filter((p) => {
       const matchesSearch =
         !search ||
         p.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -60,7 +70,7 @@ export default function Pacientes() {
       const matchesPayment = paymentFilter === "all" || p.paymentStatus === paymentFilter;
       return matchesSearch && matchesStatus && matchesObjective && matchesPayment;
     });
-  }, [search, statusFilter, objectiveFilter, paymentFilter]);
+  }, [search, statusFilter, objectiveFilter, paymentFilter, basePatients]);
 
   const hasFilters = statusFilter !== "all" || objectiveFilter !== "all" || paymentFilter !== "all";
 

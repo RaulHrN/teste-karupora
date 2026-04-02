@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth, type AppModule } from "@/contexts/AuthContext";
 import {
   Sidebar,
   SidebarContent,
@@ -27,26 +28,27 @@ import {
 } from "@/components/ui/sidebar";
 
 const mainItems = [
-  { titleKey: "dashboard", url: "/", icon: LayoutDashboard },
-  { titleKey: "agenda", url: "/agenda", icon: Calendar },
-  { titleKey: "patients", url: "/pacientes", icon: Users },
-  { titleKey: "records", url: "/prontuarios", icon: FileText },
+  { titleKey: "dashboard", url: "/", icon: LayoutDashboard, module: "dashboard" as AppModule },
+  { titleKey: "agenda", url: "/agenda", icon: Calendar, module: "agenda" as AppModule },
+  { titleKey: "patients", url: "/pacientes", icon: Users, module: "pacientes" as AppModule },
+  { titleKey: "records", url: "/prontuarios", icon: FileText, module: "prontuarios" as AppModule },
 ];
 
 const managementItems = [
-  { titleKey: "financial", url: "/financeiro", icon: DollarSign },
-  { titleKey: "chat", url: "/chat", icon: MessageCircle },
-  { titleKey: "marketing", url: "/marketing", icon: Megaphone },
-  { titleKey: "reports", url: "/relatorios", icon: BarChart3 },
+  { titleKey: "financial", url: "/financeiro", icon: DollarSign, module: "financeiro" as AppModule },
+  { titleKey: "chat", url: "/chat", icon: MessageCircle, module: "chat" as AppModule },
+  { titleKey: "marketing", url: "/marketing", icon: Megaphone, module: "marketing" as AppModule },
+  { titleKey: "reports", url: "/relatorios", icon: BarChart3, module: "relatorios" as AppModule },
 ];
 
 export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
   const { t } = useLanguage();
+  const { hasAccess } = useAuth();
 
   const renderItems = (items: typeof mainItems) =>
-    items.map((item) => (
+    items.filter((item) => hasAccess(item.module)).map((item) => (
       <SidebarMenuItem key={item.titleKey}>
         <SidebarMenuButton asChild>
           <NavLink
@@ -94,22 +96,24 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="p-2">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <NavLink
-                to="/configuracoes"
-                className="hover:bg-accent/60 transition-colors"
-                activeClassName="bg-accent text-accent-foreground font-medium"
-              >
-                <Settings className="mr-2 h-4 w-4 shrink-0" />
-                {!collapsed && <span>{t("settings")}</span>}
-              </NavLink>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
+      {hasAccess("configuracoes") && (
+        <SidebarFooter className="p-2">
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <NavLink
+                  to="/configuracoes"
+                  className="hover:bg-accent/60 transition-colors"
+                  activeClassName="bg-accent text-accent-foreground font-medium"
+                >
+                  <Settings className="mr-2 h-4 w-4 shrink-0" />
+                  {!collapsed && <span>{t("settings")}</span>}
+                </NavLink>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarFooter>
+      )}
     </Sidebar>
   );
 }
