@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth, type AppModule } from "@/contexts/AuthContext";
 import {
   Sidebar,
   SidebarContent,
