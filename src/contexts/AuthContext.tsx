@@ -123,7 +123,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const hasAccess = (module: AppModule): boolean => {
-    return rolePermissions[user.role].includes(module);
+    return user.roles.some((role) => rolePermissions[role].includes(module));
+  };
+
+  const hasRole = (role: UserRole): boolean => {
+    return user.roles.includes(role);
   };
 
   return (
