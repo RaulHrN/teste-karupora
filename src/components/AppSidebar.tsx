@@ -96,22 +96,24 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="p-2">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <NavLink
-                to="/configuracoes"
-                className="hover:bg-accent/60 transition-colors"
-                activeClassName="bg-accent text-accent-foreground font-medium"
-              >
-                <Settings className="mr-2 h-4 w-4 shrink-0" />
-                {!collapsed && <span>{t("settings")}</span>}
-              </NavLink>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
+      {hasAccess("configuracoes") && (
+        <SidebarFooter className="p-2">
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <NavLink
+                  to="/configuracoes"
+                  className="hover:bg-accent/60 transition-colors"
+                  activeClassName="bg-accent text-accent-foreground font-medium"
+                >
+                  <Settings className="mr-2 h-4 w-4 shrink-0" />
+                  {!collapsed && <span>{t("settings")}</span>}
+                </NavLink>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarFooter>
+      )}
     </Sidebar>
   );
 }
