@@ -46,7 +46,7 @@ export default function Pacientes() {
 
   // Nutricionistas veem apenas seus próprios pacientes
   const basePatients = useMemo(() => {
-    if (user.role === "nutricionista" && user.assignedPatientIds) {
+    if (user.roles.includes("nutricionista") && !user.roles.includes("master") && !user.roles.includes("administrativo") && user.assignedPatientIds) {
       return mockPatients.filter((p) => user.assignedPatientIds!.includes(p.id));
     }
     return mockPatients;
