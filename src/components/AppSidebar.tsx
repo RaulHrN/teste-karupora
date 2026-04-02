@@ -28,17 +28,17 @@ import {
 } from "@/components/ui/sidebar";
 
 const mainItems = [
-  { titleKey: "dashboard", url: "/", icon: LayoutDashboard },
-  { titleKey: "agenda", url: "/agenda", icon: Calendar },
-  { titleKey: "patients", url: "/pacientes", icon: Users },
-  { titleKey: "records", url: "/prontuarios", icon: FileText },
+  { titleKey: "dashboard", url: "/", icon: LayoutDashboard, module: "dashboard" as AppModule },
+  { titleKey: "agenda", url: "/agenda", icon: Calendar, module: "agenda" as AppModule },
+  { titleKey: "patients", url: "/pacientes", icon: Users, module: "pacientes" as AppModule },
+  { titleKey: "records", url: "/prontuarios", icon: FileText, module: "prontuarios" as AppModule },
 ];
 
 const managementItems = [
-  { titleKey: "financial", url: "/financeiro", icon: DollarSign },
-  { titleKey: "chat", url: "/chat", icon: MessageCircle },
-  { titleKey: "marketing", url: "/marketing", icon: Megaphone },
-  { titleKey: "reports", url: "/relatorios", icon: BarChart3 },
+  { titleKey: "financial", url: "/financeiro", icon: DollarSign, module: "financeiro" as AppModule },
+  { titleKey: "chat", url: "/chat", icon: MessageCircle, module: "chat" as AppModule },
+  { titleKey: "marketing", url: "/marketing", icon: Megaphone, module: "marketing" as AppModule },
+  { titleKey: "reports", url: "/relatorios", icon: BarChart3, module: "relatorios" as AppModule },
 ];
 
 export function AppSidebar() {
