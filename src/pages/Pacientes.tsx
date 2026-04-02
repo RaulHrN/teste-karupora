@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { AppLayout } from "@/components/AppLayout";
+import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
