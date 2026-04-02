@@ -6,7 +6,7 @@ export interface AppUser {
   id: string;
   name: string;
   email: string;
-  role: UserRole;
+  roles: UserRole[];
   clinicId: string;
   clinicName: string;
   crn?: string;
