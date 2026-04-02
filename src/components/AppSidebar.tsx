@@ -45,9 +45,10 @@ export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
   const { t } = useLanguage();
+  const { hasAccess } = useAuth();
 
   const renderItems = (items: typeof mainItems) =>
-    items.map((item) => (
+    items.filter((item) => hasAccess(item.module)).map((item) => (
       <SidebarMenuItem key={item.titleKey}>
         <SidebarMenuButton asChild>
           <NavLink
