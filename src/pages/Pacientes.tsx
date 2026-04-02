@@ -38,10 +38,19 @@ const statusBadge = {
 
 export default function Pacientes() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [objectiveFilter, setObjectiveFilter] = useState<string>("all");
   const [paymentFilter, setPaymentFilter] = useState<string>("all");
+
+  // Nutricionistas veem apenas seus próprios pacientes
+  const basePatients = useMemo(() => {
+    if (user.role === "nutricionista" && user.assignedPatientIds) {
+      return mockPatients.filter((p) => user.assignedPatientIds!.includes(p.id));
+    }
+    return mockPatients;
+  }, [user]);
 
   const objectives = useMemo(
     () => [...new Set(mockPatients.map((p) => p.objective))],
