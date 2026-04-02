@@ -20,6 +20,7 @@ interface AuthContextType {
   switchUser: (userId: string) => void;
   allUsers: AppUser[];
   hasAccess: (module: AppModule) => boolean;
+  hasRole: (role: UserRole) => boolean;
 }
 
 export type AppModule =
