@@ -53,12 +53,12 @@ export default function Pacientes() {
   }, [user]);
 
   const objectives = useMemo(
-    () => [...new Set(mockPatients.map((p) => p.objective))],
-    []
+    () => [...new Set(basePatients.map((p) => p.objective))],
+    [basePatients]
   );
 
   const filtered = useMemo(() => {
-    return mockPatients.filter((p) => {
+    return basePatients.filter((p) => {
       const matchesSearch =
         !search ||
         p.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -70,7 +70,7 @@ export default function Pacientes() {
       const matchesPayment = paymentFilter === "all" || p.paymentStatus === paymentFilter;
       return matchesSearch && matchesStatus && matchesObjective && matchesPayment;
     });
-  }, [search, statusFilter, objectiveFilter, paymentFilter]);
+  }, [search, statusFilter, objectiveFilter, paymentFilter, basePatients]);
 
   const hasFilters = statusFilter !== "all" || objectiveFilter !== "all" || paymentFilter !== "all";
 
